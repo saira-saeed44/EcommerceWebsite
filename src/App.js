@@ -9,6 +9,7 @@ import CartPage from './pages/cartPage.jsx';
 import CheckOutPage from './pages/checkoutPage.jsx';
 import ComparisonProduct from './pages/comparisonPage.jsx'; 
 import WishList from './pages/wishList.jsx';
+import OrderConfirmation from './components/orderConfirmation.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/compare" element={<ComparisonProduct />} />
         <Route path="/wishlist" element={<WishList />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
       </Routes>
     </BrowserRouter>
   );

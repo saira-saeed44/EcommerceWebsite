@@ -1,8 +1,7 @@
 import img1 from '../../assests/svg/Descriptionimage.svg';
-
 function ProductDescription() {
   return (
-    <div className="flex flex-col px-8 lg:px-16 py-6">
+    <div className="flex flex-col px-1 md:px-4 lg:px-16 py-6"> 
       <div className="max-w-7xl mx-auto text-center">
         <div className="flex flex-col lg:flex-row justify-center gap-6 mb-4">
           <h1 className="text-2xl font-medium mb-4 mr-6">Description</h1>
@@ -25,16 +24,15 @@ function ProductDescription() {
         <img
           src={img1}
           alt="Kilburn Speaker 1"
-          className="w-full lg:w-[605px] h-[348px] object-cover rounded-lg shadow-lg"
+          className="w-full max-w-[300px] md:max-w-[400px] lg:max-w-[605px] h-[348px] object-cover rounded-lg shadow-lg"
         />
         <img
           src={img1}
           alt="Kilburn Speaker 2"
-          className="w-full lg:w-[605px] h-[348px] object-cover rounded-lg shadow-lg"
+          className="w-full max-w-[300px] md:max-w-[400px] lg:max-w-[605px] h-[348px] object-cover rounded-lg shadow-lg"
         />
       </div>
     </div>
   );
 }
-
 export default ProductDescription;

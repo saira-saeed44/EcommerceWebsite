@@ -1,9 +1,11 @@
 import React from "react";
 function Gallery() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 px-6 md:px-8 lg:px-12 py-3">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 md:px-8 lg:px-12 py-3">
       <div className="grid gap-4">
         <div>
+        {/* className="object-cover max-w-[300px] h-full rounded-lg" */}
+
           <img
             className="h-auto max-w-full rounded-lg"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"

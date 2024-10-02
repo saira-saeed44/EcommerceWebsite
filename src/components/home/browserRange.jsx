@@ -9,7 +9,7 @@ const Browserrange = ({ categories }) => {
       <p className="text-center text-base md:text-lg text-[#666666] mb-8">
         Lorem ipsum sit amet consectetur adipiscing elit.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
         {categories.map((category, index) => (
           <div key={index} className="text-center">
             <img
@@ -26,5 +26,4 @@ const Browserrange = ({ categories }) => {
     </div>
   );
 };
-
 export default Browserrange;

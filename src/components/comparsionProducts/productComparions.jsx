@@ -2,18 +2,14 @@ import img1 from "../../assests/svg/Asgaard sofa 5.svg";
 import React from "react";
 import Button from "../common/button/button";
 import { useNavigate } from "react-router";
-
 const ProductComparison = () => {
   const navigate = useNavigate();
-
   const handleCkick = (productId) => {
     navigate(`/shop/${productId}`);
   };
-
   const handlecartCkick = (product) => {
     navigate(`/cart`);
   };
-
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6">
@@ -27,7 +23,6 @@ const ProductComparison = () => {
             onClick={() => navigate("/products")}
           />
         </div>
-
         <div className="flex space-x-8 mt-6 md:mt-0">
           <div className="text-center">
             <img
@@ -40,7 +35,6 @@ const ProductComparison = () => {
             <p className="text-sm text-yellow-500">★★★★☆ (4.7)</p>
             <p className="text-sm text-gray-500">204 Reviews</p>
           </div>
-
           <div className="text-center">
             <img
               src={img1}
@@ -62,7 +56,6 @@ const ProductComparison = () => {
           />
         </div>
       </div>
-
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left">
           <thead>
@@ -127,7 +120,6 @@ const ProductComparison = () => {
           </tbody>
         </table>
       </div>
-
       <div className="flex flex-col md:flex-row justify-center mt-6 space-y-4 md:space-y-0 md:space-x-4">
         <Button
           onClick={(e) => handlecartCkick()}
@@ -143,5 +135,4 @@ const ProductComparison = () => {
     </div>
   );
 };
-
 export default ProductComparison;

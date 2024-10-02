@@ -24,7 +24,7 @@ const Hero = ({ hero }) => {
           tellus, luctus nec ullamcorper mattis.
         </p>
         <Button
-          className="bg-[#B88E2F] text-white px-6 md:px-8 py-2 md:py-3 font-medium text-sm md:text-base transition duration-300 hover:bg-[#a17a27]"
+          className="bg-[#B88E2F]  text-white px-6 md:px-8 py-2 md:py-3 font-medium text-sm md:text-base transition hover:scale-105  duration-300 hover:bg-[#a17a27]"
           label="Buy Now"
           onClick={(e) => {
             handleCkick();

@@ -6,7 +6,7 @@ import * as yup from "yup";
 import CustomInput from "../common/button/button";
 import { FaAddressBook, FaPhone, FaClock } from "react-icons/fa";
 import { useNavigate } from "react-router";
-const ContactForm = () => {
+const   ContactForm = () => {
   const schema = yup.object().shape({
     firstname: yup.string().required("First name is required"),
     lastname: yup.string().required("Last name is required"),
@@ -15,7 +15,7 @@ const ContactForm = () => {
   });
   const {
     control,
-    handleSubmit,
+     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -25,9 +25,9 @@ const ContactForm = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
-  const handleCkick = (product) => {
-    navigate("/");
-  };
+  // const handleCkick = (product) => {
+  //   navigate("/");
+  // };
   return (
     <div className="px-4 lg:px-8">
       <h2 className="text-3xl font-semibold text-center pt-8">
@@ -189,15 +189,11 @@ const ContactForm = () => {
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
               ></textarea>
             </div>
-
             <div className="text-center lg:text-left">
               <Button
                 type="submit"
                 label="Submit"
                 className="py-3 px-11 bg-[#B88E2F] text-white font-semibold rounded  hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                onClick={(e) => {
-                  handleCkick();
-                }}
               />
             </div>
           </form>

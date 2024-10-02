@@ -6,7 +6,6 @@ import {
   faTruck,
   faHeadset,
 } from "@fortawesome/free-solid-svg-icons";
-
 const FeaturesSection = () => {
   return (
     <div className="bg-[#f9f4ef] py-8">
@@ -18,7 +17,6 @@ const FeaturesSection = () => {
             <p className="text-sm text-gray-600">crafted from top materials</p>
           </div>
         </div>
-
         <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 space-x-4 w-full md:w-auto">
           <FontAwesomeIcon icon={faShieldAlt} className="text-4xl text-black" />
           <div className="text-center md:text-left">
@@ -26,7 +24,6 @@ const FeaturesSection = () => {
             <p className="text-sm text-gray-600">Over 2 years</p>
           </div>
         </div>
-
         <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 space-x-4 w-full md:w-auto">
           <FontAwesomeIcon icon={faTruck} className="text-4xl text-black" />
           <div className="text-center md:text-left">
@@ -34,7 +31,6 @@ const FeaturesSection = () => {
             <p className="text-sm text-gray-600">Order over 150$</p>
           </div>
         </div>
-
         <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 space-x-4 w-full md:w-auto">
           <FontAwesomeIcon icon={faHeadset} className="text-4xl text-black" />
           <div className="text-center md:text-left">
@@ -45,6 +41,5 @@ const FeaturesSection = () => {
       </div>
     </div>
   );
-};
-
+}
 export default FeaturesSection;

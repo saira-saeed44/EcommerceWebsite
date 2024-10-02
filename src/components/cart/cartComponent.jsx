@@ -1,76 +1,91 @@
 import React from "react";
-import CustomInput from "../common/inputField/inputField";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDeleteLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/button/button";
-import { FaTrashAlt } from "react-icons/fa"; 
-import imgSrc from "../../assests/svg/Asgaard sofa 5.svg";
-
-function CartComponent() {
+const Cart = ({ cartItems, setCartItems, setIsOpenCart }) => {
+  const navigate = useNavigate();
+  const handleDeleteItem = (index) => {
+    const updatedCartItems = cartItems.filter((item, i) => i !== index);
+    setCartItems(updatedCartItems);
+  };
+  const calculateSubtotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
+  const subtotal = calculateSubtotal();
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="w-full lg:w-2/3">
-          <div className="text-black pb-4 mb-4">
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 items-center py-4 pl-2 bg-[#F9F1E7] mb-2">
-              <h3 className="text-lg font-medium">Product</h3>
-              <h3 className="text-lg font-medium hidden md:block">Price</h3>
-              <h3 className="text-lg font-medium">Quantity</h3>
-              <h3 className="text-lg font-medium">Subtotal</h3>
-            </div>
-
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 items-center py-4">
-              <div className="flex flex-col md:flex-row items-center gap-2">
-                <img
-                  src={imgSrc}
-                  alt="Product"
-                  className="w-20 h-20 object-cover rounded-md"
-                />
-                <p className="text-[#9F9F9F] font-medium">Asgaard Sofa</p>
-              </div>
-
-              <div className="hidden md:block">
-                <p className="text-[#9F9F9F]">Rs. 250,000.00</p>
-              </div>
-
-              <div>
-                <CustomInput
-                  type="number"
-                  defaultValue="1"
-                  className="w-12 h-8 border border-[#9F9F9F] rounded-md py-1 px-2 text-center"
-                />
-              </div>
-
-              <div className="flex flex-col items-center md:flex-row md:justify-between">
-                <p className="text-black font-medium mb-2 md:mb-0">Rs. 250,000.00</p>
-                <button className="text-[#B88E2F] hover:text-red-600 transition duration-300">
-                  <FaTrashAlt className="mx-auto md:ml-4" />
-                </button>
-              </div>
-            </div>
+    <div className="fixed right-0 top-0 h-screen w-full md:w-[30%] bg-white shadow-lg p-6 flex flex-col justify-between overflow-y-auto z-50">
+      <h2 className="text-3xl font-medium mb-4">
+        Shopping Cart
+        <FontAwesomeIcon
+          icon={faDeleteLeft}
+          className="pl-12 md:pl-20 cursor-pointer"
+          onClick={() => setIsOpenCart(false)}
+        />
+      </h2>
+      {cartItems.length === 0 ? (
+        <div className="flex flex-col items-center justify-center mt-10">
+          <div className="bg-yellow-100 border border-yellow-300 text-yellow-700 px-4 py-3 rounded relative w-full max-w-sm text-center shadow-lg">
+            <strong className="font-semibold">Your cart is empty!</strong>
+            <span className="block mt-1 text-sm">
+              Add items to your cart to start shopping.
+            </span>
           </div>
         </div>
-
-        <div className="w-full py-6 bg-[#F9F1E7] lg:w-1/3">
-          <h2 className="text-2xl font-semibold mb-4 text-center py-4">Cart Totals</h2>
-          <div className="p-4">
-            <div className="flex justify-between pb-2 mb-2">
-              <p className="text-[#000000]">Subtotal</p>
-              <p className="text-[#9F9F9F]">Rs. 250,000.00</p>
-            </div>
-            <div className="flex justify-between font-bold text-black text-lg">
-              <p>Total</p>
-              <p className="text-[#B88E2F]">Rs. 250,000.00</p>
-            </div>
-            <div className="flex justify-center mt-6">
-              <Button
-                className="mt-6 w-[222px] h-[58.95px] border border-black  opacity-100 transition duration-300 hover:bg-black hover:text-white"
-                label="Check Out"
+      ) : (
+        <div className="space-y-6 flex-1">
+          {cartItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between border-b pb-4 space-y-2 md:space-y-0 flex-row py-4"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-20 h-20 object-cover mr-4"
               />
-            </div> 
-          </div>
+              <div className="flex-1 px-4">
+                <h4 className="text-lg font-semibold">{item.name}</h4>
+                <p className="text-sm">Quantity: {item.quantity}</p>
+              </div>
+              <p className="text-[#B88E2F] font-bold">
+                Rs. {item.price.toLocaleString()}
+              </p>
+              <FontAwesomeIcon
+                icon={faTrash}
+                className="cursor-pointer text-red-500 ml-2"
+                onClick={() => handleDeleteItem(index)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="text-right mt-6">
+        <p className="text-xl font-semibold text-[#B88E2F]">
+          Subtotal: Rs. {subtotal.toLocaleString()}
+        </p>
+        <div className="mt-4 flex flex-col lg:flex-row justify-center md:justify-between">
+          <Button
+            className="w-full md:w-[118px] h-[30px] py-1 rounded-full border border-black text-[#000000] hover:bg-[#B88E2F] hover:text-white transition duration-300 mb-2"
+            label="Cart"
+            onClick={() => navigate("/cart")}
+          />
+          <Button
+            className="w-full md:w-[118px] h-[30px] py-1 rounded-full border border-black text-[#000000] hover:bg-[#B88E2F] hover:text-white transition duration-300 mb-2"
+            label="Checkout"
+            onClick={() => navigate("/checkout")}
+          />
+          <Button
+            className="w-full md:w-[118px] h-[30px] py-1 rounded-full border border-black text-[#000000] hover:bg-[#B88E2F] hover:text-white transition duration-300"
+            label="Compare"
+            onClick={() => navigate("/compare")}
+          />
         </div>
       </div>
     </div>
   );
-}
-
-export default CartComponent;
+};
+export default Cart;

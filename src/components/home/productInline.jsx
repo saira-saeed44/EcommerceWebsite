@@ -10,7 +10,7 @@ import {
   addToCart,
 } from "../../components/redux/features/productSlice";
 import Button from "../common/button/button";
-const ProductGrid = ({ products }) => {
+const ProductInline = ({ products }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const wishlist = useSelector((state) => state.product.wishlist);
@@ -45,17 +45,17 @@ const ProductGrid = ({ products }) => {
     );
   };
   return (
-    <div className="container mx-auto my-12 px-4">
+    <div className="container  mx-auto my-9 px-4">
       <h2 className="text-center text-[#3A3A3A] text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
         Our Products
       </h2>
-      <div className="grid gap-4 cursor-pointer md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="flex flex-col pl-7   justify-center gap-4 cursor-pointer md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {products.slice(0, visibleProducts).map((product, index) => {
           const isInCart = cart.some((cartItem) => cartItem.id === product.id);
           return (
             <div
               key={product.id}
-              className={`relative group p-4 transition-all duration-300 ${
+              className={`relative pr-7  group p-4 flex flex-row  transition-all duration-300 ${
                 index === 0 ? "" : ""
               }`}
               onClick={() => handleProductClick(product.id)}
@@ -64,15 +64,15 @@ const ProductGrid = ({ products }) => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-[300px] object-cover transform group-hover:scale-110 transition-transform duration-300"
+                  className="w-[400px] h-[200px]  object-cover transform group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <div className="bg-[#F4F5F7] p-3 transform group-hover:scale-105 transition-transform duration-300">
+              <div className="bg-[#F4F5F7] w-[900px] items-start gap-3 p-3 flex flex-col  transform group-hover:scale-105 transition-transform duration-300">
                 <h3 className="text-xl font-semibold text-[#898989]">
                   {product.name}
                 </h3>
                 <p className="text-sm text-[#666666]">{product.description}</p>
-                <div className="flex justify-between items-center mt-4">
+                <div className="flex flex-col  mt-4">
                   <span className="text-[#3A3A3A] font-semibold text-lg">
                     ${product.discountPrice}
                   </span>
@@ -143,4 +143,4 @@ const ProductGrid = ({ products }) => {
     </div>
   );
 };
-export default ProductGrid;
+export default ProductInline;

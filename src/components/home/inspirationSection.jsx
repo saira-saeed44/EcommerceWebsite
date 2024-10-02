@@ -3,8 +3,8 @@ import { CarouselDemo } from "../common/swipper";
 import img from "../../assests/svg/gallery5.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-regular-svg-icons";
+import Button from "../common/button/button";
 import CustomInput from "../common/inputField/inputField";
-
 const InspirationSection = () => {
   return (
     <div className="container font-poppins bg-[#FCF8F3] mx-auto my-12 px-4 md:px-8 lg:px-16">
@@ -17,11 +17,11 @@ const InspirationSection = () => {
             Our designers have already created a lot of beautiful prototypes
             <br /> of rooms that will inspire you.
           </p>
-          <button className="bg-[#B88E2F] text-white py-2 px-6 mt-4 hover:bg-[#a17a27] transition duration-300">
-            Explore More
-          </button>
+          <Button
+            className="bg-[#B88E2F] text-white py-2 px-6 mt-4 hover:bg-[#a17a27] transition duration-300"
+            label="Explore More"
+          />
         </div>
-
         <div className="lg:w-1/3 w-full relative pt-7">
           <img
             src={img}
@@ -45,7 +45,6 @@ const InspirationSection = () => {
             />
           </div>
         </div>
-
         <div className="lg:w-1/3 w-full pt-7 relative mt-0">
           <CarouselDemo />
           <div className="flex justify-center mt-4">
@@ -65,5 +64,4 @@ const InspirationSection = () => {
     </div>
   );
 };
-
 export default InspirationSection;

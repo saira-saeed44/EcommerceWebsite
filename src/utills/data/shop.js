@@ -90,7 +90,7 @@ export const data = {
       discount: "-50%",
     },
     {
-      name: "Syltherine",
+      name: "Hari",
       description: "Stylish cafe chair",
       price: "Rp 2.500.000",
       discountPrice: "Rp 3.500.000",

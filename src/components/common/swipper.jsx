@@ -10,10 +10,8 @@ import gallery9 from "../../assests/svg/gallery11.svg";
 import gallery11 from "../../assests/svg/gallery11.svg";
 import gallery2 from "../../assests/svg/gallery11.svg";
 import gallery5 from "../../assests/svg/gallery11.svg";
-
 function CustomNavigation() {
   const swiper = useSwiper();
-
   return (
     <>
       <IconButton
@@ -26,7 +24,6 @@ function CustomNavigation() {
       >
         <NavArrowLeft className="h-7 w-7 -translate-x-0.5 stroke-2 text-white" />
       </IconButton>
-
       <IconButton
         isCircular
         size="lg"
@@ -40,11 +37,9 @@ function CustomNavigation() {
     </>
   );
 }
-
 function customPagination(_, className) {
   return `<span class="${className} w-4 h-4 [&.swiper-pagination-bullet-active]:!opacity-100 [&.swiper-pagination-bullet-active]:[background:rgb(var(--color-background))] !opacity-50 ![background:rgb(var(--color-background))]"></span>`;
 }
-
 export function CarouselDemo() {
   return (
     <div className="max-w-[686px]">
