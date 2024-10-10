@@ -1,34 +1,43 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FaShare, FaRegHeart, FaHeart, FaExchangeAlt } from "react-icons/fa";
+import { data } from "../../utills/data/home";
 import {
   addFavourite,
   removeFavourite,
   addToCart,
 } from "../../components/redux/features/productSlice";
 import Button from "../common/button/button";
-import { data } from "../../utills/data/home"
-const ProductGrid = ({ products, handleShowMore }) => {
+const ProductCol = ({ products, handleShowMore }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const wishlist = useSelector((state) => state.product.wishlist);
   const cart = useSelector((state) => state.product.cart);
-  const handleProductClick = (productId) => {
-    navigate(`/shop/${productId}`);
-  };
+
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    toast.success("Added to Cart");
+    const isInCart = cart.some((cartItem) => cartItem.id === product.id);
+    if (!isInCart) {
+      dispatch(addToCart(product));
+      toast.success("Added to Cart");
+    } else {
+      toast.info("Product is already in the cart");
+    }
   };
+
   const handleShare = (productId) => {
     navigate(`/shop/${productId}`);
   };
+
+  const handleCompare = () => {
+    navigate("/cart");
+  };
+
   const handleLike = (product) => {
     const isLiked = wishlist.some((item) => item.id === product.id);
     if (isLiked) {
-      dispatch(removeFavourite(product));
+      dispatch(removeFavourite({ id: product.id }));
       toast.info("Removed from Favourites");
     } else {
       dispatch(addFavourite(product));
@@ -36,42 +45,43 @@ const ProductGrid = ({ products, handleShowMore }) => {
     }
   };
 
-  const handleCompare = () => {
-    toast.info("Compare feature coming soon!");
+  const handleProductClick = (productId) => {
+    navigate(`/shop/${productId}`);
   };
-
   return (
     <div className="container mx-auto my-12 px-4">
       <h2 className="text-center text-[#3A3A3A] text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
         Our Products
       </h2>
-      <div className="grid gap-4 cursor-pointer md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
         {products.map((product) => {
           const isInCart = cart.some((cartItem) => cartItem.id === product.id);
           return (
             <div
               key={product.id}
-              className="relative group p-4 transition-all duration-300"
+              className="relative group p-4 transition-all duration-300 flex flex-row"
               onClick={() => handleProductClick(product.id)}
             >
-              <div className="overflow-hidden">
+              <div className="overflow-hidden w-1/2">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-[300px] object-cover transform group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-[200px] object-cover transform group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <div className="bg-[#F4F5F7] p-3 transform group-hover:scale-105 transition-transform duration-300">
-                <h3 className="text-xl font-semibold text-[#898989]">
+              <div className="bg-[#F4F5F7] w-1/2 flex pl-3 pt-5 flex-col justify-between transform group-hover:scale-105 transition-transform duration-300">
+                <h3 className="text-xl font-semibold pt-2  text-[#898989]">
                   {product.name}
                 </h3>
-                <p className="text-sm text-[#666666]">{product.description}</p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-[#3A3A3A] font-semibold text-lg">
+                <p className="text-sm pb-20 text-[#666666]">
+                  {product.description}
+                </p>
+                <div className="flex justify-between  items-center mt-4">
+                  <span className="text-[#3A3A3A]  font-semibold text-lg">
                     ${product.discountPrice}
                   </span>
                   {product.price && (
-                    <span className="text-[#B0B0B0] line-through text-xs">
+                    <span className="text-[#B0B0B0] pr-3 line-through text-xs">
                       ${product.price}
                     </span>
                   )}
@@ -81,7 +91,7 @@ const ProductGrid = ({ products, handleShowMore }) => {
                 <div className="absolute inset-0 bg-black opacity-50" />
                 {!isInCart && (
                   <button
-                    className="bg-white text-[#B88E2F] px-8 py-3 text-md mb-4 z-10 transition-transform duration-300 hover:bg-[#B88E2F] hover:text-white"
+                    className="bg-white text-[#B88E2F] px-8 py-3 text-md mb-4 z-10"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleAddToCart(product);
@@ -128,19 +138,17 @@ const ProductGrid = ({ products, handleShowMore }) => {
           );
         })}
       </div>
-
-      {products?.length <
-        data?.products.length &&(
-          <div className="text-center mt-8">
-            <Button
-              className="text-[#B88E2F] w-[245px] h-[48px] font-semibold text-xs md:text-lg border border-[#B88E2F] transition-colors duration-300 hover:bg-[#B88E2F] hover:text-white"
-              label="Show More"
-              onClick={handleShowMore}
-            />
-          </div>
-        )}
+      {products?.length < data?.products.length && (
+        <div className="text-center mt-8">
+          <Button
+            className="text-[#B88E2F] w-[245px] h-[48px] font-semibold text-xs md:text-lg border border-[#B88E2F] transition-colors duration-300 hover:bg-[#B88E2F] hover:text-white"
+            label="Show More"
+            onClick={handleShowMore}
+          />
+        </div>
+      )}
     </div>
   );
 };
 
-export default ProductGrid;
+export default ProductCol;

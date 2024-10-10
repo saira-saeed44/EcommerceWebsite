@@ -44,6 +44,7 @@ const productSlice = createSlice({
     },
     searchProduct: (state, action) => {
       const item = state.products.find((item) => item.id === action.payload);
+   
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter(

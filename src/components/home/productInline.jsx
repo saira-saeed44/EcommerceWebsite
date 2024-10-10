@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,12 +9,12 @@ import {
   addToCart,
 } from "../../components/redux/features/productSlice";
 import Button from "../common/button/button";
-const ProductInline = ({ products }) => {
+import { data } from "../../utills/data/home";
+const ProductInline = ({ products, handleShowMore}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const wishlist = useSelector((state) => state.product.wishlist);
   const cart = useSelector((state) => state.product.cart);
-  const [visibleProducts, setVisibleProducts] = useState(4);
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     toast("Added to Cart");
@@ -39,23 +38,18 @@ const ProductInline = ({ products }) => {
   const handleProductClick = (productId) => {
     navigate(`/shop/${productId}`);
   };
-  const handleShowMore = () => {
-    setVisibleProducts((prevVisible) =>
-      Math.min(prevVisible + 4, products.length)
-    );
-  };
   return (
     <div className="container  mx-auto my-9 px-4">
       <h2 className="text-center text-[#3A3A3A] text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
         Our Products
       </h2>
-      <div className="flex flex-col pl-7   justify-center gap-4 cursor-pointer md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-        {products.slice(0, visibleProducts).map((product, index) => {
+      <div className="flex flex-col pl-7  justify-center gap-4 cursor-pointer md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        {products.map((product, index) => {
           const isInCart = cart.some((cartItem) => cartItem.id === product.id);
           return (
             <div
               key={product.id}
-              className={`relative pr-7  group p-4 flex flex-row  transition-all duration-300 ${
+              className={`relative pr-7 pt-5 group p-4 flex flex-row  transition-all duration-300 ${
                 index === 0 ? "" : ""
               }`}
               onClick={() => handleProductClick(product.id)}
@@ -131,15 +125,16 @@ const ProductInline = ({ products }) => {
           );
         })}
       </div>
-      {visibleProducts < products.length && (
-        <div className="text-center mt-8">
-          <Button
-            className="text-[#B88E2F] w-[245px] h-[48px] font-semibold text-xs md:text-lg border border-[#B88E2F] transition-colors duration-300 hover:bg-[#B88E2F] hover:text-white"
-            label="Show More"
-            onClick={handleShowMore}
-          />
-        </div>
-      )}
+      {products?.length <
+        data?.products.length &&(
+          <div className="text-center mt-8">
+            <Button
+              className="text-[#B88E2F] w-[245px] h-[48px] font-semibold text-xs md:text-lg border border-[#B88E2F] transition-colors duration-300 hover:bg-[#B88E2F] hover:text-white"
+              label="Show More"
+              onClick={handleShowMore}
+            />
+          </div>
+        )}
     </div>
   );
 };

@@ -5,7 +5,7 @@
   import { faHeart, faContactCard } from "@fortawesome/free-regular-svg-icons";
   import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
   import { useSelector } from "react-redux";
-  const NavBar = () => {
+  const NavBar = () => {  
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const cartItems = useSelector((state) => state.product.cart);

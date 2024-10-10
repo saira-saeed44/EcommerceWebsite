@@ -17,6 +17,5 @@ root.render(
   </Provider>
 );
 
-// Performance measuring (optional)
 reportWebVitals();
 
